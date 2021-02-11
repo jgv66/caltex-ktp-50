@@ -1,0 +1,7 @@
+{
+  "name": "caltex-ktp",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
