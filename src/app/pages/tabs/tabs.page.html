@@ -1,0 +1,23 @@
+<ion-tabs>
+
+    <ion-tab-bar slot="bottom">
+
+        <ion-tab-button tab="tabinicio">
+            <ion-icon name="search"></ion-icon>
+            <ion-label>Inicio</ion-label>
+        </ion-tab-button>
+
+        <ion-tab-button tab="tabmicarrito">
+            <ion-icon name="cart"></ion-icon>
+            <ion-label>Mi Carrito</ion-label>
+            <ion-badge *ngIf=" count " color="danger">{{ count | async }}</ion-badge>
+        </ion-tab-button>
+
+        <ion-tab-button tab="tabsalida">
+            <ion-icon name="exit"></ion-icon>
+            <ion-label>Salir</ion-label>
+        </ion-tab-button>
+
+    </ion-tab-bar>
+
+</ion-tabs>

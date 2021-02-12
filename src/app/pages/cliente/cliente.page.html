@@ -1,0 +1,245 @@
+<ion-header>
+    <ion-toolbar color="primary">
+
+        <ion-title>Cliente</ion-title>
+
+        <ion-buttons slot="end">
+            <ion-button (click)="buscarCliente()">
+                <ion-icon name="search"></ion-icon>
+            </ion-button>
+            <ion-button (click)="limpiarCliente()">
+                <ion-icon name="refresh"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+
+    </ion-toolbar>
+
+</ion-header>
+
+<ion-content class="ion-padding">
+
+    <ion-grid>
+        <ion-row>
+            <ion-col class="ion-text-right" size="4">
+                <p>Cliente :</p>
+            </ion-col>
+            <ion-col class="ion-text-left" size="8">
+                <p><b>{{ cliente?.codigo }}</b></p>
+            </ion-col>
+        </ion-row>
+        <ion-row *ngIf=" cliente?.sucursal ">
+            <ion-col class="ion-text-right" size="4">
+                <p>Sucursal :</p>
+            </ion-col>
+            <ion-col class="ion-text-left" size="8">
+                <p><b>{{ cliente?.sucursal }}</b></p>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col class="ion-text-right" size="4">
+                <p>Rut :</p>
+            </ion-col>
+            <ion-col class="ion-text-left" size="8">
+                <p><b>{{ cliente?.rut }}</b></p>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col class="ion-text-right" size="4">
+                <p>Razón Social :</p>
+            </ion-col>
+            <ion-col class="ion-text-left" size="8">
+                <p><b>{{ cliente?.razonsocial }}</b></p>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col class="ion-text-right" size="4">
+                <p>Dirección :</p>
+            </ion-col>
+            <ion-col class="ion-text-left" size="8">
+                <p><b>{{ cliente?.direccion }}</b></p>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col class="ion-text-right" size="4">
+                <p>Comuna :</p>
+            </ion-col>
+            <ion-col class="ion-text-left" size="8">
+                <p><b>{{ cliente?.comuna }}</b></p>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col class="ion-text-right" size="4">
+                <p>Ciudad :</p>
+            </ion-col>
+            <ion-col class="ion-text-left" size="8">
+                <p><b>{{ cliente?.ciudad }}</b></p>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col class="ion-text-right" size="4">
+                <p>Teléfonos :</p>
+            </ion-col>
+            <ion-col class="ion-text-left" size="8">
+                <p><b>{{ cliente?.telefonos }}</b></p>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col class="ion-text-right" size="4">
+                <p>eMail :</p>
+            </ion-col>
+            <ion-col class="ion-text-left" size="8">
+                <p><b>{{ cliente?.email }}</b></p>
+            </ion-col>
+        </ion-row>
+        <ion-row *ngIf=" cliente?.vendedor != '' ">
+            <ion-col class="ion-text-right" size="4">
+                <p>Vendedor (<b>{{ cliente?.vendedor }}</b>) :</p>
+            </ion-col>
+            <ion-col class="ion-text-left" size="8">
+                <p><b>{{ cliente?.nombrevendedor }}</b></p>
+            </ion-col>
+        </ion-row>
+        <ion-row *ngIf=" cliente?.listaprecios != '' ">
+            <ion-col class="ion-text-right" size="4">
+                <p>Lista (<b>{{ cliente?.listaprecio }}</b>) :</p>
+            </ion-col>
+            <ion-col class="ion-text-left" size="8">
+                <p><b>{{ cliente?.nombrelista }}</b></p>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+
+    <div class="hr"> </div>
+
+    <ion-button *ngIf=" !cliente " expand="block" size="small" (click)="salir()" class="botonimpagos">
+        <ion-icon slot="start" name="exit"></ion-icon>
+        Salir
+    </ion-button>
+    <div *ngIf=" cliente " class="botonimpagos">
+        <ion-grid>
+            <ion-row class="boton3opciones">
+                <ion-col size="3">
+                    <ion-button expand="block" size="small" (click)="salir()">
+                        <ion-icon slot="start" name="exit"></ion-icon>
+                        Salir
+                    </ion-button>
+                </ion-col>
+                <ion-col size="4">
+                    <ion-button expand="block" size="small" (click)="trasladar()">
+                        <ion-icon slot="start" name="checkmark"></ion-icon>
+                        Seleccionar
+                    </ion-button>
+                </ion-col>
+                <ion-col size="5">
+                    <ion-button expand="block" size="small" (click)="documentosImpagos()">
+                        <ion-icon slot="start" name="color-wand"></ion-icon>
+                        Ver impagos
+                    </ion-button>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </div>
+
+    <div *ngIf=" impagos " class="listaimpagos">
+
+        <ion-segment (ionChange)="cambiaOpcionImpagos($event)" [(ngModel)]="segment" color="tertiary">
+
+            <ion-segment-button value="Vencidos">
+                <ion-label>Vencidos (${{ saldo('ven') }})</ion-label>
+            </ion-segment-button>
+
+            <ion-segment-button value="Por vencer">
+                <ion-label>Por vencer (${{ saldo('por') }})</ion-label>
+            </ion-segment-button>
+
+        </ion-segment>
+
+        <div *ngIf=" lVencidos === true ">
+            <ion-card *ngFor="let impago of Vencidos" (click)="muestraID( impago )" class="deudacard">
+                <ion-grid>
+                    <ion-row class="deudas">
+                        <ion-col class="ion-text-right" size="3">
+                            <p>{{ impago.tipo }} :</p>
+                        </ion-col>
+                        <ion-col class="ion-text-left" size="3">
+                            <p><b>{{ impago.numero }}</b></p>
+                        </ion-col>
+                        <ion-col class="ion-text-right" size="3">
+                            <p>Bruto :</p>
+                        </ion-col>
+                        <ion-col class="ion-text-left" size="3">
+                            <p><b>${{ impago.monto | number:'1.0-0' }}</b></p>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row class="deudas">
+                        <ion-col class="ion-text-right" size="3">
+                            <p>Emisión :</p>
+                        </ion-col>
+                        <ion-col class="ion-text-left" size="3">
+                            <p><b>{{ impago.emision }}</b></p>
+                        </ion-col>
+                        <ion-col class="ion-text-right" size="3">
+                            <p>Saldo :</p>
+                        </ion-col>
+                        <ion-col color="danger" class="ion-text-left" size="3">
+                            <p><b>${{ impago.saldo | number:'1.0-0' }}</b></p>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row class="deudas">
+                        <ion-col class="ion-text-right" size="3">
+                            <p>Vencimiento :</p>
+                        </ion-col>
+                        <ion-col class="ion-text-left" size="3">
+                            <p><b>{{ impago.fultvenc }}</b></p>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </ion-card>
+        </div>
+
+        <div *ngIf=" lVencidos === false ">
+            <ion-card *ngFor="let impago of PorVencer" (click)="muestraID( impago )" class="deudacard">
+                <ion-grid>
+                    <ion-row class="deudas">
+                        <ion-col class="ion-text-right" size="3">
+                            <p>{{ impago.tipo }} :</p>
+                        </ion-col>
+                        <ion-col class="ion-text-left" size="3">
+                            <p><b>{{ impago.numero }}</b></p>
+                        </ion-col>
+                        <ion-col class="ion-text-right" size="3">
+                            <p>Bruto :</p>
+                        </ion-col>
+                        <ion-col class="ion-text-left" size="3">
+                            <p><b>${{ impago.monto | number:'1.0-0' }}</b></p>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row class="deudas">
+                        <ion-col class="ion-text-right" size="3">
+                            <p>Emisión :</p>
+                        </ion-col>
+                        <ion-col class="ion-text-left" size="3">
+                            <p><b>{{ impago.emision }}</b></p>
+                        </ion-col>
+                        <ion-col class="ion-text-right" size="3">
+                            <p>Saldo :</p>
+                        </ion-col>
+                        <ion-col color="danger" class="ion-text-left" size="3">
+                            <p><b>${{ impago.saldo | number:'1.0-0' }}</b></p>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row class="deudas">
+                        <ion-col class="ion-text-right" size="3">
+                            <p>Vencimiento :</p>
+                        </ion-col>
+                        <ion-col class="ion-text-left" size="3">
+                            <p><b>{{ impago.fultvenc }}</b></p>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </ion-card>
+        </div>
+
+    </div>
+
+</ion-content>

@@ -1,0 +1,49 @@
+<ion-header no-border>
+    <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
+        <ion-title>Login</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding" style="padding: 10px;">
+
+    <ion-card style="margin: 5px;">
+
+        <img src=" ./assets/imgs/auto-00{{auto_arriba}}.jpg ">
+
+        <ion-card-header class="ion-text-center " style="padding-top: 10px; padding-bottom: 10px;">
+            <ion-card-title class="ion-text-center ">Credenciales</ion-card-title>
+        </ion-card-header>
+
+        <ion-card-content>
+
+            <ion-list>
+                <ion-item>
+                    <ion-label position="stacked ">Email</ion-label>
+                    <ion-input type="text" [(ngModel)]="email" clearInput=true></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-label position="stacked ">Clave</ion-label>
+                    <ion-input type="password" [(ngModel)]="clave " clearInput=true></ion-input>
+                </ion-item>
+                <ion-item style="font-size: 90%;">
+                    <ion-label position="stacked ">Empresa</ion-label>
+                    <ion-select [(ngModel)]='empresa' mode="ios" interface="action-sheet" placeholder="Seleccione una empresa... ">
+                        <ion-select-option *ngFor="let emp of empresas " [value]="emp.codigo ">{{ emp.razonsocial.substring(0,25) }}</ion-select-option>
+                    </ion-select>
+                </ion-item>
+                <hr>
+                <ion-button size="small" expand="block" (click)="doIniciar() ">Ingresar</ion-button>
+            </ion-list>
+
+        </ion-card-content>
+
+    </ion-card>
+
+    <div class="imgkinetik">
+        <img src="assets/imgs/logo-kinetik.png ">
+    </div>
+
+</ion-content>

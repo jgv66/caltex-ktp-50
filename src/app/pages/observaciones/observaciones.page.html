@@ -1,0 +1,54 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-button (click)="salir()">
+                <ion-icon slot="icon-only" name="chevron-back-outline"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-title>Observaciones</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+    <ion-list>
+
+        <!-- <ion-list-header mode="ios">
+            <ion-label>Indique las observaciones que desea agregar al documento o correo</ion-label>
+        </ion-list-header> -->
+
+        <ion-item>
+            <ion-label position="floating">Observaciones al documento</ion-label>
+            <ion-textarea placeholder="Ingrese aquí sus observaciones..." type="text" name="textoObs" [(ngModel)]="textoObs" rows=6>
+            </ion-textarea>
+        </ion-item>
+        <ion-item>
+            <ion-label position="stacked">Fecha de Entrega</ion-label>
+            <ion-datetime displayFormat="DD/MM/YYYY" pickerFormat="DD MMMM YYYY" min="2019" max="2023" name="fechaDesp" [(ngModel)]="fechaDesp">
+            </ion-datetime>
+        </ion-item>
+        <ion-item>
+            <ion-label position="stacked">Orden de Compra</ion-label>
+            <ion-input type="text" name="textoOcc" [(ngModel)]="textoOcc">
+            </ion-input>
+        </ion-item>
+
+        <ion-grid>
+            <ion-row>
+                <ion-col size="3">
+                    <ion-button expand="block" size="small" (click)="salir()">Salir</ion-button>
+                </ion-col>
+                <ion-col size="9">
+                    <ion-button expand="block" size="small" (click)="enviar()">
+                        <ion-icon slot="end" name="send"></ion-icon>
+                        Guardar observaciones
+                    </ion-button>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+
+    </ion-list>
+
+    <img src="assets/imgs/logo-kinetik.png" class="logo-kinetik">
+
+</ion-content>

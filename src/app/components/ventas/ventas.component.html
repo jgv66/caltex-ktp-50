@@ -1,0 +1,47 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+            <ion-button (click)="salir()">
+                <ion-icon name="arrow-back"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-title>NVV Pendientes</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-progress-bar *ngIf=" buscando " type="indeterminate"></ion-progress-bar>
+
+<ion-content class="ion-padding">
+
+    <ion-list>
+        <ion-item *ngFor="let nvv of lista" style="font-size: 90%;" (click)="detalle( nvv )">
+            <ion-grid fixed>
+                <ion-row style="height: 30px;">
+                    <ion-col size="12" style="height: 30px;padding: 0px; margin: 0px;" class="ion-text-nowrap">
+                        <p><b>{{ nvv.cliente }}</b></p>
+                    </ion-col>
+                </ion-row>
+                <ion-row style="font-size: 80%;">
+                    <ion-col size="6">
+                        <p color="primary">NVV: {{ nvv.numero }}</p>
+                    </ion-col>
+                    <ion-col size="6">
+                        <p color="primary">Emisión: {{ nvv.emision }}</p>
+                    </ion-col>
+                </ion-row>
+                <ion-row style="font-size: 80%;">
+                    <ion-col size="4">
+                        <ion-label color="primary" class="ion-text-left">Neto:<b>${{ nvv.neto | number:"1.0-0" }}</b></ion-label>
+                    </ion-col>
+                    <ion-col size="4">
+                        <ion-label color="primary" class="ion-text-left">Desp.:<b>${{ nvv.despachado | number:"1.0-0" }}</b></ion-label>
+                    </ion-col>
+                    <ion-col size="4">
+                        <ion-label color="primary" class="ion-text-left">Saldo:<b>{{ nvv.saldo | number:"1.2-2" }}%</b></ion-label>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-item>
+    </ion-list>
+
+</ion-content>

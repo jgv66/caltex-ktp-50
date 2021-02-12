@@ -1,0 +1,70 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+            <ion-button (click)="salir()">
+                <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-title>Documento</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+    <ion-list lines="none">
+        <ion-grid fixed color="danger">
+            <ion-row>
+                <ion-col size="5">
+                    <p>{{ documento.tipo }} :</p>
+                </ion-col>
+                <ion-col size="7">
+                    <p><b>{{ documento.numero }}</b></p>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col size="5">
+                    <p>Fecha :</p>
+                </ion-col>
+                <ion-col size="7">
+                    <p><b>{{ documento.emision }}</b></p>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col size="5">
+                    <p>Monto :</p>
+                </ion-col>
+                <ion-col size="7">
+                    <p><b>${{ documento.monto | number:"1.0-0" }}</b></p>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+        <ion-item-divider style=" margin-top: 25px;" color="tertiary">Detalle</ion-item-divider>
+
+        <ion-item *ngFor="let linea of detalle">
+            <ion-grid>
+                <ion-row>
+                    <ion-col size="4">{{ linea.codigo }}</ion-col>
+                    <ion-col>{{ linea.descrip }}</ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col text-right size="4">
+                        <b><p>${{ linea.precio | number:"1.0-0" }}</p></b>
+                    </ion-col>
+                    <ion-col text-center size="1">
+                        <p>x</p>
+                    </ion-col>
+                    <ion-col text-right size="2">
+                        <b><p>{{ linea.cantidad | number:"1.0-0" }}</p></b>
+                    </ion-col>
+                    <ion-col text-center size="1">
+                        <p>=</p>
+                    </ion-col>
+                    <ion-col text-right size="4">
+                        <b><p>$ {{ (linea.precio * linea.cantidad) | number:"1.0-0" }}</p></b>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-item>>
+    </ion-list>
+
+</ion-content>

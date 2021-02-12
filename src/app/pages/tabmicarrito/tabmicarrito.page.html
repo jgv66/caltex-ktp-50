@@ -1,0 +1,78 @@
+<ion-header>
+    <ion-toolbar color="primary">
+
+        <ion-title text-center>Mi Carrito</ion-title>
+
+        <ion-buttons slot="end">
+            <ion-button (click)="observaciones()">
+                <ion-icon slot="icon-only" name="add"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+
+    </ion-toolbar>
+</ion-header>
+
+<ion-content ion-padding>
+
+    <ion-grid ion-padding *ngIf=" totalCarrito > 0 " style=" margin-top: 20px; ">
+        <ion-row text-center>
+            <ion-col size="6" class="ion-text-center">
+                <ion-button expand="block" shape="round" color="secondary">
+                    Total Neto $ {{ sumaCarrito( false ) | number:"1.0-0" }}
+                </ion-button>
+                <!-- <ion-badge color="secondary">Total Neto $ {{ sumaCarrito( false ) | number:"1.0-0" }}</ion-badge> -->
+            </ion-col>
+            <ion-col size="6" class="ion-text-center">
+                <ion-button expand="block" shape="round" color="tertiary">
+                    Total Bruto $ {{ sumaCarrito( true ) | number:"1.0-0" }}
+                </ion-button>
+                <!-- <ion-badge color="tertiary">Total Bruto $ {{ sumaCarrito( true ) | number:"1.0-0" }}</ion-badge> -->
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+
+    <ion-list ion-padding>
+
+        <ion-item-sliding *ngFor="let producto of carrito">
+
+            <ion-item>
+                <ion-grid ion-padding>
+
+                    <ion-row>
+                        <ion-col size="12">
+                            <ion-label text-left>
+                                <h2><b>{{ producto.codigo }}</b></h2>
+                                <h4>{{ producto.descrip.trim() }}</h4>
+                            </ion-label>
+                        </ion-col>
+                    </ion-row>
+                    <app-fila-sindesc *ngIf=" producto.descuentomax <= 0 " [producto]="producto"></app-fila-sindesc>
+                    <app-fila-condesc *ngIf=" producto.descuentomax  > 0 " [producto]="producto"></app-fila-condesc>
+                    <ion-row>
+                        <ion-col size="12"></ion-col>
+                    </ion-row>
+
+                </ion-grid>
+            </ion-item>
+
+            <ion-item-options side="start">
+                <ion-item-option color="primary" (click)="cambiarCantidad(producto)">
+                    <ion-icon slot="icon-only" name="color-wand"></ion-icon>Cantidad</ion-item-option>
+                <!-- <ion-item-option color="secondary" (click)="infoProducto(producto)"   ><ion-icon slot="icon-only" name="information-circle"></ion-icon>Info</ion-item-option> -->
+            </ion-item-options>
+
+            <ion-item-options side="end">
+                <ion-item-option color="danger" (click)="quitarDelPedido(producto)">
+                    <ion-icon slot="icon-only" name="trash"></ion-icon>Borrar</ion-item-option>
+            </ion-item-options>
+
+        </ion-item-sliding>
+
+        <div *ngIf=" totalCarrito > 0 " style=" margin-top: 20px;">
+            <ion-button (click)="preguntaGrabar()" size="large" expand="block">Grabar Nota de Venta</ion-button>
+            <ion-progress-bar *ngIf=" grabando " type="indeterminate"></ion-progress-bar>
+        </div>
+
+    </ion-list>
+
+</ion-content>

@@ -1,0 +1,98 @@
+.imagen-producto {
+    margin-top: 10px;
+}
+
+.grid-productos {
+    margin-top: 1px;
+}
+
+.grilla_botones, .grilla-tarjeta {
+    background-color: white;
+}
+
+ion-card-header {
+    border-radius: 10px 10px 00px 00px;
+}
+  
+ion-card-content {
+    border-radius: 0px 0px 10px 10px;
+}    
+
+.con_textos {
+    font-size: 83%;
+}
+
+.infoleft {
+    width: calc(100% - 80px);
+    padding: 2px;
+}
+
+.margen-p {
+    margin-top: 1px;
+    margin-bottom: 1px;
+}
+
+.inforight p {
+    color: blueviolet;
+}
+
+.imagen {
+    display: block;
+    width: 50%;
+}
+
+.footer-stock {
+    // background-color: var(  --ion-color-primary );
+    // color: white;
+}
+
+.texto-venta p {
+    margin-top: 2px !important;
+    height: 12px    !important;
+}
+
+.hr {
+    border-bottom: 1px solid #ccc;
+    margin: 5px 0 0 10px;
+    width: 95%;
+}
+
+// /* ----------- iPhone 6, 6S, 7 and 8 ----------- */
+// /* Portrait and Landscape */
+// @media only screen 
+//   and (min-device-width: 375px) 
+//   and (max-device-width: 667px) 
+//   and (-webkit-min-device-pixel-ratio: 2) { 
+
+//     .infoleft {
+//         width: calc(100% - 200px);
+//         margin-right: 4px;
+//     }
+    
+// }
+
+// /* Portrait */
+// @media only screen 
+//   and (min-device-width: 375px) 
+//   and (max-device-width: 667px) 
+//   and (-webkit-min-device-pixel-ratio: 2)
+//   and (orientation: portrait) { 
+
+//     .infoleft {
+//         width: calc(100% - 40px);
+//     }
+    
+// }
+
+// /* Landscape */
+// @media only screen 
+//   and (min-device-width: 375px) 
+//   and (max-device-width: 667px) 
+//   and (-webkit-min-device-pixel-ratio: 2)
+//   and (orientation: landscape) { 
+
+//     .infoleft {
+//         width: calc(100% - 40px);
+//     }
+    
+// }

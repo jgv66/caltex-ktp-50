@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-toolbar color="primary">
+      <ion-buttons slot="start">
+          <ion-button (click)="salir()">            
+              <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+          </ion-button>
+      </ion-buttons>    
+    <ion-title>SKU: {{ codigotecnico }} </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+    <img  src="http://www.grupocaltex.cl/imagenes/fotos18/{{ imagen }}.jpg" 
+          (click)="salir()"
+          onerror="this.src='assets/imgs/auto-003.jpg'" />
+
+</ion-content>

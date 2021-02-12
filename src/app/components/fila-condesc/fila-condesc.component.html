@@ -1,0 +1,26 @@
+<ion-row *ngIf=" producto.descuentomax > 0">
+    <ion-col text-right size="2.8">
+        <p>Mayorista :</p>
+    </ion-col>
+    <ion-col text-center size="2.8">
+        <b><p>${{ producto.preciomayor | number:"1.0-0" }}</p></b>
+    </ion-col>
+    <ion-col text-center size="0.5">
+        <p>x</p>
+    </ion-col>
+    <ion-col text-center size="1.5">
+        <b><p>{{ producto.cantidad | number:"1.0-0" }}</p></b>
+    </ion-col>
+    <ion-col text-center size="0.5">
+        <p>=</p>
+    </ion-col>
+    <ion-col text-left size="3.0">
+        <b><p>$ {{ producto.preciomayor * producto.cantidad | number:"1.0-0" }}</p></b>
+    </ion-col>
+</ion-row>
+
+<ion-row *ngIf=" producto.descuentomax > 0" class="fila-enana">
+    <ion-col text-center>
+        <p>Descuento ({{ ( (producto.descuentomax*1) + (producto.dsctovend*1) ) | number:"1.0-2"}}%) ya incluido en el precio unitario</p>
+    </ion-col>
+</ion-row>
